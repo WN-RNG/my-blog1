@@ -1,0 +1,25 @@
+# Node
+node_modules/
+
+# Hexo
+public/
+.deploy_git/
+db.json
+
+# Logs
+*.log
+
+# Cache
+.cache/
+
+# Env
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

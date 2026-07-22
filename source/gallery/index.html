@@ -1,0 +1,482 @@
+---
+title: 摄影图集
+date: 2026-07-21
+type: gallery
+layout: false
+---
+
+
+  <style>
+  .gallery-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+  }
+
+  .gallery-masonry {
+      column-count: 4;
+      column-gap: 16px;
+  }
+
+  .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: #f0f0f0;
+  }
+
+  .gallery-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+  }
+
+  .gallery-item:hover img {
+      transform: scale(1.05);
+  }
+
+  .gallery-header {
+      text-align: center;
+      padding: 40px 20px 20px;
+  }
+
+  .gallery-header h1 {
+      font-size: 2em;
+      margin-bottom: 8px;
+  }
+
+  .gallery-header .gallery-count {
+      color: #999;
+      font-size: 0.95em;
+  }
+
+  .lightbox-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      animation: fadeIn 0.25s ease;
+  }
+
+  .lightbox-overlay.active {
+      display: flex;
+  }
+
+  @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+  }
+
+  .lightbox-img-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 90vw;
+      max-height: 75vh;
+      overflow: hidden;
+      cursor: grab;
+  }
+
+  .lightbox-img-wrap:active {
+      cursor: grabbing;
+  }
+
+  .lightbox-img-wrap img {
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      user-select: none;
+      pointer-events: none;
+  }
+
+  .lightbox-close {
+      position: absolute;
+      top: 16px;
+      right: 28px;
+      color: #ccc;
+      font-size: 42px;
+      font-weight: 300;
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.2s;
+      line-height: 1;
+  }
+
+  .lightbox-close:hover { color: #fff; }
+
+  .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ccc;
+      font-size: 36px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      width: 56px;
+      height: 80px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 10;
+  }
+
+  .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+  }
+
+  .lightbox-prev { left: 16px; }
+  .lightbox-next { right: 16px; }
+
+  .lightbox-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 18px;
+      z-index: 10;
+  }
+
+  .lightbox-toolbar button {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ddd;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s;
+      min-width: 44px;
+  }
+
+  .lightbox-toolbar button:hover {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+  }
+
+  .lightbox-counter {
+      color: #bbb;
+      font-size: 0.95em;
+      min-width: 60px;
+      text-align: center;
+  }
+
+  .zoom-indicator {
+      color: #aaa;
+      font-size: 0.85em;
+      min-width: 50px;
+      text-align: center;
+  }
+
+  @media (max-width: 1200px) {
+      .gallery-masonry { column-count: 3; }
+  }
+  @media (max-width: 768px) {
+      .gallery-masonry { column-count: 2; }
+      .gallery-wrapper { padding: 10px; }
+      .lightbox-nav { width: 40px; height: 56px; font-size: 24px; }
+      .lightbox-prev { left: 6px; }
+      .lightbox-next { right: 6px; }
+  }
+  @media (max-width: 480px) {
+      .gallery-masonry { column-count: 1; }
+  }
+  </style>
+  
+
+  <div class="gallery-wrapper">
+
+      <div class="gallery-header">
+          <h1>摄影图集</h1>
+          <p class="gallery-count">共 35 张照片</p>
+      </div>
+
+      <div class="gallery-masonry" id="galleryMasonry">
+          
+      <div class="gallery-item" data-index="0">
+          <img src="travel/DSC07393.JPG" alt="photo 1" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="1">
+          <img src="travel/DSC07395.JPG" alt="photo 2" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="2">
+          <img src="travel/DSC07400.JPG" alt="photo 3" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="3">
+          <img src="travel/DSC07413.JPG" alt="photo 4" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="4">
+          <img src="travel/DSC07414.JPG" alt="photo 5" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="5">
+          <img src="travel/DSC07415.JPG" alt="photo 6" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="6">
+          <img src="travel/DSC07416.JPG" alt="photo 7" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="7">
+          <img src="travel/DSC07417.JPG" alt="photo 8" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="8">
+          <img src="travel/DSC07418.JPG" alt="photo 9" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="9">
+          <img src="travel/DSC07419.JPG" alt="photo 10" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="10">
+          <img src="travel/DSC07420.JPG" alt="photo 11" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="11">
+          <img src="travel/DSC07421.JPG" alt="photo 12" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="12">
+          <img src="travel/DSC07422.JPG" alt="photo 13" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="13">
+          <img src="travel/DSC07423.JPG" alt="photo 14" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="14">
+          <img src="travel/DSC07424.JPG" alt="photo 15" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="15">
+          <img src="travel/DSC07425.JPG" alt="photo 16" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="16">
+          <img src="travel/DSC07426.JPG" alt="photo 17" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="17">
+          <img src="travel/DSC07427.JPG" alt="photo 18" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="18">
+          <img src="travel/DSC07428.JPG" alt="photo 19" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="19">
+          <img src="travel/DSC07429.JPG" alt="photo 20" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="20">
+          <img src="travel/DSC07431.JPG" alt="photo 21" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="21">
+          <img src="travel/DSC07432.JPG" alt="photo 22" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="22">
+          <img src="travel/DSC07433.JPG" alt="photo 23" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="23">
+          <img src="travel/DSC07434.JPG" alt="photo 24" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="24">
+          <img src="travel/DSC07435.JPG" alt="photo 25" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="25">
+          <img src="travel/DSC07436.JPG" alt="photo 26" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="26">
+          <img src="travel/DSC07437.JPG" alt="photo 27" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="27">
+          <img src="travel/DSC07438.JPG" alt="photo 28" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="28">
+          <img src="travel/DSC07439.JPG" alt="photo 29" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="29">
+          <img src="travel/DSC07440.JPG" alt="photo 30" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="30">
+          <img src="travel/DSC07441.JPG" alt="photo 31" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="31">
+          <img src="travel/DSC07442.JPG" alt="photo 32" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="32">
+          <img src="travel/DSC07443.JPG" alt="photo 33" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="33">
+          <img src="travel/DSC07444.JPG" alt="photo 34" loading="lazy">
+      </div>
+      <div class="gallery-item" data-index="34">
+          <img src="travel/DSC07445.JPG" alt="photo 35" loading="lazy">
+      </div>
+      </div>
+
+  </div>
+
+  <div class="lightbox-overlay" id="lightbox">
+      <span class="lightbox-close" id="lightboxClose">&times;</span>
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#10094;</button>
+      <button class="lightbox-nav lightbox-next" id="lightboxNext">&#10095;</button>
+
+      <div class="lightbox-img-wrap" id="lightboxImgWrap">
+          <img src="" alt="" id="lightboxImg">
+      </div>
+
+      <div class="lightbox-toolbar">
+          <button id="btnZoomOut" title="缩小">−</button>
+          <span class="zoom-indicator" id="zoomLevel">100%</span>
+          <button id="btnZoomIn" title="放大">+</button>
+          <span class="lightbox-counter" id="lightboxCounter"></span>
+          <button id="btnZoomReset" title="重置">↺</button>
+      </div>
+  </div>
+
+  <script>
+  (function() {
+      var images = ["travel/DSC07393.JPG","travel/DSC07395.JPG","travel/DSC07400.JPG","travel/DSC07413.JPG","travel/DSC07414.JPG","travel/DSC07415.JPG","travel/DSC07416.JPG","travel/DSC07417.JPG","travel/DSC07418.JPG","travel/DSC07419.JPG","travel/DSC07420.JPG","travel/DSC07421.JPG","travel/DSC07422.JPG","travel/DSC07423.JPG","travel/DSC07424.JPG","travel/DSC07425.JPG","travel/DSC07426.JPG","travel/DSC07427.JPG","travel/DSC07428.JPG","travel/DSC07429.JPG","travel/DSC07431.JPG","travel/DSC07432.JPG","travel/DSC07433.JPG","travel/DSC07434.JPG","travel/DSC07435.JPG","travel/DSC07436.JPG","travel/DSC07437.JPG","travel/DSC07438.JPG","travel/DSC07439.JPG","travel/DSC07440.JPG","travel/DSC07441.JPG","travel/DSC07442.JPG","travel/DSC07443.JPG","travel/DSC07444.JPG","travel/DSC07445.JPG"];
+      var currentIndex = 0;
+      var currentZoom = 1;
+      var zoomStep = 0.25;
+      var minZoom = 0.25;
+      var maxZoom = 5;
+
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightboxImg');
+      var lightboxImgWrap = document.getElementById('lightboxImgWrap');
+      var lightboxCounter = document.getElementById('lightboxCounter');
+      var zoomLevelEl = document.getElementById('zoomLevel');
+
+      var items = document.querySelectorAll('.gallery-item');
+      items.forEach(function(item) {
+          item.addEventListener('click', function() {
+              var idx = parseInt(this.getAttribute('data-index'), 10);
+              openLightbox(idx);
+          });
+      });
+
+      function openLightbox(index) {
+          currentIndex = index;
+          currentZoom = 1;
+          applyZoom();
+          lightboxImg.src = images[currentIndex];
+          lightboxImg.alt = 'photo ' + (currentIndex + 1);
+          lightbox.classList.add('active');
+          updateCounter();
+          document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+          lightbox.classList.remove('active');
+          document.body.style.overflow = '';
+      }
+
+      function prevImage() {
+          currentIndex = (currentIndex - 1 + images.length) % images.length;
+          resetZoom();
+          lightboxImg.src = images[currentIndex];
+          updateCounter();
+      }
+
+      function nextImage() {
+          currentIndex = (currentIndex + 1) % images.length;
+          resetZoom();
+          lightboxImg.src = images[currentIndex];
+          updateCounter();
+      }
+
+      function zoomIn() {
+          currentZoom = Math.min(currentZoom + zoomStep, maxZoom);
+          applyZoom();
+          updateZoomLabel();
+      }
+
+      function zoomOut() {
+          currentZoom = Math.max(currentZoom - zoomStep, minZoom);
+          applyZoom();
+          updateZoomLabel();
+      }
+
+      function resetZoom() {
+          currentZoom = 1;
+          applyZoom();
+          updateZoomLabel();
+      }
+
+      function applyZoom() {
+          lightboxImg.style.transform = 'scale(' + currentZoom + ')';
+      }
+
+      function updateCounter() {
+          lightboxCounter.textContent = (currentIndex + 1) + ' / ' + images.length;
+      }
+
+      function updateZoomLabel() {
+          zoomLevelEl.textContent = Math.round(currentZoom * 100) + '%';
+      }
+
+      document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+      document.getElementById('lightboxPrev').addEventListener('click', prevImage);
+      document.getElementById('lightboxNext').addEventListener('click', nextImage);
+      document.getElementById('btnZoomIn').addEventListener('click', zoomIn);
+      document.getElementById('btnZoomOut').addEventListener('click', zoomOut);
+      document.getElementById('btnZoomReset').addEventListener('click', resetZoom);
+
+      lightbox.addEventListener('click', function(e) {
+          if (e.target === lightbox) closeLightbox();
+      });
+
+      lightboxImgWrap.addEventListener('wheel', function(e) {
+          e.preventDefault();
+          if (e.deltaY < 0) zoomIn();
+          else zoomOut();
+      }, { passive: false });
+
+      document.addEventListener('keydown', function(e) {
+          if (!lightbox.classList.contains('active')) return;
+          switch (e.key) {
+              case 'Escape':   closeLightbox(); break;
+              case 'ArrowLeft':  prevImage(); break;
+              case 'ArrowRight': nextImage(); break;
+              case '+': case '=': zoomIn(); break;
+              case '-': zoomOut(); break;
+              case '0': resetZoom(); break;
+          }
+      });
+
+      (function() {
+          var initialDistance = 0;
+          var initialZoom = 1;
+
+          lightboxImgWrap.addEventListener('touchstart', function(e) {
+              if (e.touches.length === 2) {
+                  initialDistance = getTouchDistance(e.touches);
+                  initialZoom = currentZoom;
+              }
+          }, { passive: true });
+
+          lightboxImgWrap.addEventListener('touchmove', function(e) {
+              if (e.touches.length === 2) {
+                  e.preventDefault();
+                  var newDistance = getTouchDistance(e.touches);
+                  var scale = newDistance / initialDistance;
+                  currentZoom = Math.max(minZoom, Math.min(maxZoom, initialZoom * scale));
+                  applyZoom();
+                  updateZoomLabel();
+              }
+          }, { passive: false });
+
+          function getTouchDistance(touches) {
+              var dx = touches[0].clientX - touches[1].clientX;
+              var dy = touches[0].clientY - touches[1].clientY;
+              return Math.sqrt(dx * dx + dy * dy);
+          }
+      })();
+
+  })();
+  </script>
+  
