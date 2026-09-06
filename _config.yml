@@ -21,6 +21,7 @@ pretty_urls:
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
 
 root: /my-blog1/
+
 # Directory
 source_dir: source
 public_dir: public
