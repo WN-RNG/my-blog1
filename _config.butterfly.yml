@@ -163,9 +163,9 @@ index_top_img_height:
 
 # The subtitle on homepage
 subtitle:
-  enable: true
+  enable: false
   # Typewriter Effect（打字效果）
-  effect: true
+  effect: false
   loop: false
   # Customize typed.js
   # https://github.com/mattboldt/typed.js/#customization
@@ -181,6 +181,8 @@ subtitle:
   # If you close the typewriter effect, the subtitle will only show the first line of sub
   sub:
     - 多看书, 多看报, 少玩电脑,多睡觉
+    - 要多做，要做的更好才行
+    - 不要害怕承诺，承诺才是能力的体现，承诺了就去马上实现它，不要等太久才行
 
 # Article layout on the homepage
 # 1: Cover on the left, info on the right
